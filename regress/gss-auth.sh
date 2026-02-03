@@ -37,12 +37,12 @@ gssdir="$OBJ/gss"
 mkdir -p "$gssdir"
 export KRB5CCNAME="$gssdir/cc"
 export KRB5_CONFIG="$gssdir/krb5.conf"
-export KRB5_KDC_PROFILE="$gssdir"
+export KRB5_KDC_PROFILE="$gssdir/kdc.conf"
 export KRB5_KTNAME="$gssdir/ssh.keytab"
 export KRB5RCACHETYPE="none"
 
 # Configure Kerberos
-cat<<EOF > "$gssdir/kdc.conf"
+cat<<EOF > "$KRB5_KDC_PROFILE"
 [realms]
     EXAMPLE.ORG = {
         database_name = $gssdir/principal
@@ -55,7 +55,7 @@ cat<<EOF > "$gssdir/kdc.conf"
     debug = true
 EOF
 
-cat<<EOF > "$gssdir/krb5.conf"
+cat<<EOF > "$KRB5_CONFIG"
 [libdefaults]
     default_realm = EXAMPLE.ORG
 [realms]

@@ -121,7 +121,7 @@ setup_kdc() {
 teardown_kdc() {
     kill "$(cat "$gssdir/pid")"
     kdestroy
-    rm -f "$KRB5_KTNAME"
+    rm -f "$KRB5_KTNAME" "$gssdir/pid"
     kdb5_util destroy -f
 }
 

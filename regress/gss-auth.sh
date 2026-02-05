@@ -1,5 +1,7 @@
 tid="GSSAPI Authentication"
 
+set -x
+
 # Skip the test if GSSAPI support is not configured
 if ! grep -E '^#define GSSAPI' "$BUILDDIR/config.h" >/dev/null 2>&1; then
     skip "GSSAPI not enabled"
@@ -102,7 +104,11 @@ teardown_sshd() {
 }
 
 setup_kdc() {
+    echo "$KRB5_CONFIG"
+    cat "$KRB5_CONFIG"
     kdb5_util create -P "foo" -s
+    echo "$KRB5_CONFIG"
+    cat "$KRB5_CONFIG"
     krb5kdc -w 1 -P "$gssdir/pid"
     i=0;
     while [ ! -f "$gssdir/pid" -a $i -lt 10 ]; do

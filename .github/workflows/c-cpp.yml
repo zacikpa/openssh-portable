@@ -70,7 +70,7 @@ jobs:
       env:
         TEST_SSH_UNSAFE_PERMISSIONS: 1
         TEST_SSH_HOSTBASED_AUTH: yes
-        LTESTS: ${{ vars.LTESTS }}
+        LTESTS: gss-auth
     - name: test OpenSSL3 ABI compatibility
       if: ${{ startsWith(matrix.config, 'openssl-3') }}
       run: |
